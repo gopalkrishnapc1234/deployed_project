@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/head') %>
+<body class="bg-light">
+  <%- include('partials/navbar') %>
+
+  <div class="container mt-5">
+    <h3 class="mb-4">Available Jobs</h3>
+    <div class="row g-4">
+      <% if (jobs.length === 0) { %>
+        <div class="col-12">
+          <div class="alert alert-info">No jobs posted yet.</div>
+        </div>
+      <% } %>
+
+      <% jobs.forEach(job => { %>
+        <div class="col-md-6">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <h5 class="card-title"><%= job.title %></h5>
+                  <p class="mb-1 small text-muted"><%= job.company %> • <%= job.location %></p>
+                </div>
+                <div class="text-end small text-muted"><%= new Date(job.date).toLocaleDateString() %></div>
+              </div>
+              <p class="card-text mt-3"><%= job.description.length > 220 ? job.description.substring(0,220) + '...' : job.description %></p>
+
+              <% const applied = appliedJobIds.includes(String(job._id)); %>
+
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <% if (!currentUser) { %>
+                  <a href="/login" class="btn btn-outline-primary">Login to Apply</a>
+                <% } else if (currentUser.role === 'admin') { %>
+                  <span class="badge bg-warning text-dark">Posted by Admin</span>
+                <% } else { %>
+                  <form method="POST" action="/user/apply/<%= job._id %>" enctype="multipart/form-data">
+                    <input type="file" name="resume" accept=".pdf,.doc,.docx" class="form-control form-control-sm mb-2" required />
+                    <button class="btn <%= applied ? 'btn-secondary' : 'btn-success' %>" <%= applied ? 'disabled' : '' %>>
+                      <%= applied ? 'Applied' : 'Apply' %>
+                    </button>
+                  </form>
+                <% } %>
+
+                <small class="text-muted">Job ID: <%= job._id.toString().slice(-6) %></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

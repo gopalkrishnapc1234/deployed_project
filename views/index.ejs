@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/head') %>
+<body class="bg-light">
+  <%- include('partials/navbar') %>
+<!-- Hero -->
+  <header class="hero">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold">Smart Hiring for Smart Teams</h1>
+    <p class="lead">Your trusted HR consultancy partner</p>
+
+    <% if (!currentUser) { %>
+      <a href="/register" class="btn btn-primary me-2">Get Started</a>
+      <a href="/user/jobs" class="btn btn-outline-secondary">Browse Jobs</a>
+    <% } else { %>
+      <div class="d-flex justify-content-center gap-2 mt-3">
+        <% if (currentUser.role === 'user') { %>
+          <a href="/user/dashboard" class="btn btn-primary">Go to Dashboard</a>
+          <a href="/user/jobs" class="btn btn-outline-secondary">Browse Jobs</a>
+        <% } else { %>
+          <a href="/admin" class="btn btn-warning">Open Admin Panel</a>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</header>
+
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="text-center mb-4">Our Services</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-6 col-lg-4">
+          <div class="card p-3 text-center">
+            <h4>Talent Acquisition</h4>
+            <p>We help you find the right candidates quickly and efficiently.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card p-3 text-center">
+            <h4>HR Consulting</h4>
+            <p>Expert HR strategies to streamline your business operations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+    <section id="process" class="section"> 
+        <div class="container"> 
+          <h2 class="text-center mb-4">Our Process</h2>
+           <div class="row text-center g-4"> 
+            <div class="col-6 col-md-3">
+              <h4>1. Connect</h4>
+                 <p>We understand your requirements.</p></div> 
+                   <div class="col-6 col-md-3">
+                     <h4>2. Screen</h4>
+                       <p>Shortlisting top candidates.</p>
+            </div> 
+            <div class="col-6 col-md-3">
+               <h4>3. Interview</h4>
+                 <p>Facilitating client-candidate meetings.</p>
+            </div>
+                   <div class="col-6 col-md-3">
+                     <h4>4. Hire</h4>
+                        <p>Onboarding the right fit.</p>
+                    </div> 
+          </div>
+         </div> 
+    </section>
+  <!-- Business Enquiry -->
+  <section id="contact" class="section">
+  <div class="container">
+    <h2 class="text-center mb-4">Business Enquiry</h2>
+    <form class="row g-3" action="/sendQuery" method="POST">
+      <div class="col-md-6">
+        <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+      </div>
+      <div class="col-md-6">
+        <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+      </div>
+      <div class="col-12">
+        <textarea class="form-control" name="message" rows="4" placeholder="Your Message" required></textarea>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+  <!-- About Us -->
+     <!-- About Us -->
+  <section id="AboutUs" class="section py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">About Us</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          
+          <p>
+            Welcome to <strong>GradMat</strong>, your trusted partner in recruitment and talent acquisition.
+            We are a leading staffing and HR consultancy dedicated to connecting skilled professionals with 
+            companies that value talent, ambition, and integrity. Our mission is simple — to make hiring smarter, 
+            faster, and more human.
+          </p>
+
+          <p>
+            At Apexstaffing, we understand that every organization is unique, and so are its hiring needs. 
+            With a deep understanding of multiple industries and market trends, our team delivers tailored 
+            recruitment solutions that help businesses scale efficiently and individuals build rewarding careers.
+          </p>
+
+          <h5 class="mt-4 fw-semibold">We specialize in end-to-end recruitment services, including:</h5>
+          <ul class="list-unstyled ms-3">
+            <li>• Executive search and leadership hiring</li>
+            <li>• Permanent and contractual staffing</li>
+            <li>• Bulk and campus hiring</li>
+            <li>• Specialized recruitment for IT & Non-IT roles</li>
+            <li>• HR outsourcing and talent consulting</li>
+          </ul>
+
+          <p class="mt-4">
+            Our success is built on transparency, commitment, and results. We follow a consultative approach — 
+            understanding client requirements, sourcing the right talent, conducting pre-screening, and ensuring 
+            cultural fit before final onboarding.
+          </p>
+
+          <p>
+            What sets us apart is our strong belief that recruitment is not just about filling positions — 
+            it’s about building lasting partnerships that fuel business growth.
+          </p>
+
+          <hr class="my-5">
+
+          <h3 class="text-center mb-3 text-primary">Our Vision</h3>
+          <p class="text-center">
+            To become a preferred recruitment partner for organizations across India by delivering quality talent 
+            solutions that create value, trust, and long-term success.
+          </p>
+
+          <h3 class="text-center mt-5 mb-3 text-primary">Our Mission</h3>
+          <p class="text-center">
+            To empower businesses and professionals by bridging opportunities with expertise, enabling growth on both 
+            sides of the hiring process.
+          </p>
+
+          <h3 class="text-center mt-5 mb-3 text-primary">Our Core Values</h3>
+          <ul class="list-unstyled text-center">
+            <li><strong>Integrity:</strong> Honest, ethical, and transparent practices.</li>
+            <li><strong>Commitment:</strong> Dedicated to delivering excellence in every hire.</li>
+            <li><strong>Innovation:</strong> Adapting to changing markets with creative hiring solutions.</li>
+            <li><strong>Collaboration:</strong> Valuing long-term relationships over short-term gains.</li>
+          </ul>
+
+          <hr class="my-5">
+
+          <div class="text-center">
+           
+            <p>
+              Email: 
+              <a href="mailto:gopalkrishnashukla336@gmail.com" class="text-decoration-none text-dark">gopalkrishnashukla336@gmail.com</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="mailto:parthkrishnashukla1234@gmail.com" class="text-decoration-none text-dark">parthkrishnashukla1234@gmail.com</a>
+            </p>
+            <p>
+              Phone: 
+              <a href="tel:+919335813144" class="text-decoration-none text-dark">+91 9335813144</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="tel:+916386173127" class="text-decoration-none text-dark">+91 6386173127</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+</body>
+</html>

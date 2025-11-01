@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/head') %>
+<body class="bg-light">
+  <%- include('partials/navbar') %>
+
+  <div class="container mt-5">
+    <h3>Your Dashboard</h3>
+    <p class="text-muted">Applied jobs are listed below.</p>
+
+    <% if (applied.length === 0) { %>
+      <div class="alert alert-info">You have not applied to any jobs yet. <a href="/user/jobs">Browse jobs</a></div>
+    <% } %>
+
+    <div class="row g-3">
+      <% applied.forEach(item => { %>
+        <div class="col-md-6">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5><%= item.job.title %></h5>
+              <p class="small text-muted">Applied on: <%= new Date(item.appliedAt).toLocaleString() %></p>
+              <p><%= item.job.description.length > 200 ? item.job.description.substring(0,200) + '...' : item.job.description %></p>
+              <a href="/user/resume/<%= item._id %>" class="btn btn-sm btn-outline-primary">Download Resume</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

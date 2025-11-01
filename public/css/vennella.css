@@ -1,0 +1,94 @@
+/* vennella.css - subtle typography and accent palette */
+:root{
+  --accent:#6f42c1;
+  --muted:#6c757d;
+  --card-bg:#ffffff;
+  --soft:#f8f9fb;
+  --radius:12px;
+  --max-width:1100px;
+}
+
+body {
+  font-family: "Vennella", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--soft);
+  color: black;
+  background-color: #afb5b9;
+}
+  .hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+        url('../Assets/Hero_Section_Image.avif') 
+        center/cover no-repeat;
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+    .section {
+      padding: 60px 15px;
+      background-color: #abaeb1;
+    }
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      height: 100%;
+    }
+    footer {
+      background: #343a40;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    a{
+      text-decoration: none;
+    }
+.navbar-brand {
+  color: var(--accent) !important;
+  letter-spacing: 0.4px;
+}
+.navbar .nav-link,
+.navbar .btn {
+  color: white !important;
+  transition: all 0.3s ease;
+}
+.process-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .process-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  #process h2 {
+    font-weight: 700;
+  }
+
+  .card-title {
+    color: #0d6efd; /* Bootstrap primary color */
+  }
+/* Hover effect */
+.navbar .nav-link:hover,
+.navbar .btn:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #fff, 0 0 16px #fff;
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg,var(--accent), #5b2fa6);
+  border: 0;
+  box-shadow: 0 6px 18px rgba(95, 39, 170, 0.08);
+}
+
+.btn-success {
+  background: linear-gradient(180deg,#16a34a, #0f8a3a);
+  border: 0;
+}
+
+.list-group-item {
+  border: 0;
+}
+
+.vh-100 { min-height: 100vh; }
+
+.small { font-size: .85rem; }
