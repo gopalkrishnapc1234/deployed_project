@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
+MONGO_URL='mongodb+srv://GopalKrishnaShukla:shivay1234@gradmat.rjpehe6.mongodb.net/?appName=gradMat';
 
-const mongoURI = 'mongodb://127.0.0.1:27017/shivay';
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected:', mongoURI))
-  .catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGO_URL)
+  .then(() => console.log("✅ MongoDB connected successfully"))
+  .catch(err => console.error("❌ MongoDB connection error:", err));
 
 module.exports = mongoose;
