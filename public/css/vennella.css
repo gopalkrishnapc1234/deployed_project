@@ -53,7 +53,10 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
   }
-
+  .navbar.navbar-shrink .navbar-toggler {
+  color: white;
+  border-color: white;
+}
   .process-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
