@@ -41,7 +41,6 @@ body {
       text-decoration: none;
     }
 .navbar-brand {
-  color: var(--accent) !important;
   letter-spacing: 0.4px;
 }
 .navbar .nav-link,
@@ -61,7 +60,6 @@ body {
     transform: translateY(-10px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
   }
-
   #process h2 {
     font-weight: 700;
   }
