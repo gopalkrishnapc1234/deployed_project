@@ -11,12 +11,12 @@
 
     <% if (!currentUser) { %>
       <a href="/register" class="btn btn-primary me-2">Get Started</a>
-      <a href="/user/jobs" class="btn btn-outline-secondary">Browse Jobs</a>
+      <a href="/user/jobs" class="btn btn-primary text-white">Browse Jobs</a>
     <% } else { %>
       <div class="d-flex justify-content-center gap-2 mt-3">
         <% if (currentUser.role === 'user') { %>
           <a href="/user/dashboard" class="btn btn-primary">Go to Dashboard</a>
-          <a href="/user/jobs" class="btn btn-outline-secondary">Browse Jobs</a>
+          <a href="/user/jobs" class="btn btn-primary text-white">Browse Jobs</a>
         <% } else { %>
           <a href="/admin" class="btn btn-warning">Open Admin Panel</a>
         <% } %>
