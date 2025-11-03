@@ -43,6 +43,9 @@ body {
 .navbar-brand {
   letter-spacing: 0.4px;
 }
+ #logoutbutton:hover {
+    color: #ff6666 !important; /* हल्का red hover पर */
+  }
 .navbar .nav-link,
 .navbar .btn {
   color: white !important;
