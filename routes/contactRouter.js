@@ -17,7 +17,7 @@ router.post("/sendQuery", async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "grademateofficial0@gmail.com",
+      user: "www.grademateofficial0@gmail.com",
       pass: "azar qoxo zlky kfgr",
     },
   });
@@ -25,7 +25,7 @@ router.post("/sendQuery", async (req, res) => {
   // Mail content
   const mailOptions = {
   from: email,
-  to: "grademateofficial0@gmail.com",
+  to: "www.grademateofficial0@gmail.com",
   subject: `New Business Enquiry from ${name}`,
   text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`,
 };
