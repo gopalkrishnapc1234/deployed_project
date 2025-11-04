@@ -22,7 +22,7 @@
       <div class="col-md-9 col-lg-10 py-4">
         <div class="container">
 
-          <!-- Users (accordion) -->
+          <!-- Registered Users -->
           <section id="users" class="mb-4">
             <h4>Registered Users</h4>
             <div class="accordion" id="userAccordion">
@@ -51,7 +51,7 @@
             </div>
           </section>
 
-          <!-- Jobs list with delete -->
+          <!-- Posted Jobs -->
           <section id="jobs-list" class="mb-4">
             <h4>Posted Jobs</h4>
             <% if (jobs.length === 0) { %>
@@ -74,7 +74,7 @@
             </div>
           </section>
 
-          <!-- Post job -->
+          <!-- Post New Job -->
           <section id="post-job" class="mb-4">
             <h4>Post New Job</h4>
             <form action="/admin/job" method="POST">
@@ -96,48 +96,84 @@
             </form>
           </section>
 
-         <!-- Applied -->
-<section id="applied" class="mb-4">
-  <h4>Applied Users</h4>
-  <% if (applied.length === 0) { %>
-    <div class="alert alert-info">Nobody applied yet.</div>
-  <% } %>
+          <!-- Applied Users (Accordion Format by Job) -->
+          <section id="applied" class="mb-4">
+            <h4>Applied Users</h4>
+            <% if (applied.length === 0) { %>
+              <div class="alert alert-info">Nobody applied yet.</div>
+            <% } else { %>
+              <% 
+                // Group all applications by job
+                const grouped = {};
+                applied.forEach(a => {
+                  const jobId = a.job ? a.job._id : 'unknown';
+                  if (!grouped[jobId]) grouped[jobId] = { job: a.job, users: [] };
+                  grouped[jobId].users.push(a);
+                });
+              %>
 
-  <div class="table-responsive">
-    <table class="table table-striped align-middle">
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Job</th>
-          <th>Applied At</th>
-          <th>Resume</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% applied.forEach(a => { %>
-          <tr>
-            <td>
-              <strong><%= a.user ? a.user.name : 'Unknown' %></strong>
-              <div class="small text-muted"><%= a.user ? a.user.email : '' %></div>
-            </td>
-            <td><%= a.job ? a.job.title : 'Deleted Job' %></td>
-            <td class="small text-muted"><%= new Date(a.appliedAt).toLocaleString() %></td>
-            <td>
-              <% if (a.resume && a.resume.data) { %>
-                <a href="/admin/resume/<%= a._id %>" target="_blank" class="btn btn-sm btn-outline-primary">
-                  View Resume
-                </a>
-              <% } else { %>
-                <span class="text-muted small">No resume</span>
-              <% } %>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
+              <div class="accordion" id="appliedAccordion">
+                <% Object.keys(grouped).forEach((jobId, index) => { 
+                    const jobData = grouped[jobId];
+                %>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="applied-heading-<%= index %>">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#applied-collapse-<%= index %>">
+                        <div>
+                          <div class="fw-bold"><%= jobData.job ? jobData.job.title : 'Deleted Job' %></div>
+                          <div class="small text-muted"><%= jobData.job && jobData.job.company ? jobData.job.company : '' %></div>
+                        </div>
+                      </button>
+                    </h2>
+                    <div id="applied-collapse-<%= index %>" class="accordion-collapse collapse" data-bs-parent="#appliedAccordion">
+                      <div class="accordion-body">
+                        <% if (jobData.users.length === 0) { %>
+                          <div class="text-muted small">No applicants for this job.</div>
+                        <% } else { %>
+                          <div class="table-responsive">
+                            <table class="table table-striped align-middle mb-0">
+                              <thead>
+                                <tr>
+                                  <th>User</th>
+                                  <th>Applied At</th>
+                                  <th>Resume</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <% jobData.users.forEach(a => { %>
+                                  <tr>
+                                    <td>
+                                      <strong><%= a.user ? a.user.name : 'Unknown' %></strong>
+                                      <div class="small text-muted"><%= a.user ? a.user.email : '' %></div>
+                                    </td>
+                                    <td class="small text-muted"><%= new Date(a.appliedAt).toLocaleString() %></td>
+                                    <td>
+                                      <% if (a.resume && a.resume.data) { %>
+                                        <a href="/admin/resume/<%= a._id %>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                          View Resume
+                                        </a>
+                                      <% } else { %>
+                                        <span class="text-muted small">No resume</span>
+                                      <% } %>
+                                    </td>
+                                  </tr>
+                                <% }) %>
+                              </tbody>
+                            </table>
+                          </div>
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                <% }) %>
+              </div>
+            <% } %>
+          </section>
+
+        </div>
+      </div>
+    </div>
   </div>
-</section>
-
 
   <%- include('partials/footer') %>
 </body>
