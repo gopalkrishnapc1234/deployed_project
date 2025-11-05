@@ -103,7 +103,6 @@
               <div class="alert alert-info">Nobody applied yet.</div>
             <% } else { %>
               <% 
-                // Group all applications by job
                 const grouped = {};
                 applied.forEach(a => {
                   const jobId = a.job ? a.job._id : 'unknown';
@@ -136,7 +135,7 @@
                                 <tr>
                                   <th>User</th>
                                   <th>Applied At</th>
-                                  <th>Resume</th>
+                                  <th>Actions</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -149,12 +148,16 @@
                                     <td class="small text-muted"><%= new Date(a.appliedAt).toLocaleString() %></td>
                                     <td>
                                       <% if (a.resume && a.resume.data) { %>
-                                        <a href="/admin/resume/<%= a._id %>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                        <a href="/admin/resume/<%= a._id %>" target="_blank" class="btn btn-sm btn-outline-primary me-2">
                                           View Resume
                                         </a>
                                       <% } else { %>
                                         <span class="text-muted small">No resume</span>
                                       <% } %>
+
+                                      <!-- Select / Reject Buttons -->
+                                      <button class="btn btn-sm btn-success select-btn">Select</button>
+                                      <button class="btn btn-sm btn-danger reject-btn">Reject</button>
                                     </td>
                                   </tr>
                                 <% }) %>
@@ -176,5 +179,36 @@
   </div>
 
   <%- include('partials/footer') %>
+
+  <!-- JS for Select/Reject Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.select-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const td = btn.parentElement;
+          const rejectBtn = td.querySelector('.reject-btn');
+          btn.remove(); // remove select button
+          if (rejectBtn) rejectBtn.remove(); // remove reject button
+          const span = document.createElement('span');
+          span.className = 'fw-bold text-success';
+          span.textContent = 'Selected';
+          td.appendChild(span);
+        });
+      });
+
+      document.querySelectorAll('.reject-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const td = btn.parentElement;
+          const selectBtn = td.querySelector('.select-btn');
+          btn.remove(); // remove reject button
+          if (selectBtn) selectBtn.remove(); // remove select button
+          const span = document.createElement('span');
+          span.className = 'fw-bold text-danger';
+          span.textContent = 'Rejected';
+          td.appendChild(span);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
